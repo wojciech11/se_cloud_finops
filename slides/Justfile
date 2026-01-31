@@ -1,0 +1,57 @@
+npx := require("npx")
+jq := require("jq")
+
+# npm install -g @mermaid-js/mermaid-cli
+mmdc := require("mmdc")
+
+google-chrome := "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+
+# Generate marp slides from slides.md
+slides:
+    npx @marp-team/marp-cli@latest slides.md --allow-local-files --pdf --output slides.pdf
+
+# Watch and regenerate slides on changes
+slides-watch:
+    npx @marp-team/marp-cli@latest slides.md --pdf --output slides.pdf --watch
+
+# Generate HTML slides
+slides-html:
+    npx @marp-team/marp-cli@latest slides.md --html --output slides.html
+
+# Generate HTML slides
+slides-html-watch:
+    npx @marp-team/marp-cli@latest slides.md --html --output slides.html --watch
+
+fmt:
+    npx prettier --write *.md
+
+prettier:
+    npx prettier --write .
+
+# Generate PNG diagrams from mermaid files in slides/imgs
+diagrams:
+    #!/usr/bin/env bash
+    for file in imgs/*.mmd; do
+        if [ -f "$file" ]; then
+            basename=$(basename "$file" .mmd)
+            mmdc -i "$file" -s 20 -o "imgs/$basename.png"
+        fi
+    done
+
+diagrams-cloud:
+    #!/usr/bin/env bash
+    for file in imgs/cloud*.html; do
+        if [ -f "$file" ]; then
+            just html-to-png $file "1300,600"
+        fi
+    done
+
+[group("imgs")]
+html-to-png HTML_FILE WINDOW_SIZE:
+   {{google-chrome}} --headless --disable-gpu --window-size={{ WINDOW_SIZE }} --screenshot={{ replace(HTML_FILE, ".html", ".png") }} file://$(pwd)/{{ HTML_FILE }}
+
+compile_and_open:
+    just slides && open *.pdf
+
+slides-pdf-to-png:
+    mkdir -p temp; pdftoppm -png slides.pdf temp/slides.png

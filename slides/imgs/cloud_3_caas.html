@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Computing Models</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fffef5;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .column {
+            width: 180px;
+            border: 3px solid #333;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 4px 4px 0 #333;
+        }
+        .header {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+        .header.onprem { background: #4285f4; }
+        .header.iaas { background: #fbbc04; }
+        .header.caas { background: #fbbc04; }
+        .header small {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+        .layers {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .layer {
+            padding: 12px 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+        .layer.you-manage {
+            background: #4285f4;
+            color: white;
+        }
+        .layer.cloud-manage {
+            background: #34a853;
+            color: white;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        .legend-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .legend-dot.blue { background: #4285f4; }
+        .legend-dot.green { background: #34a853; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column">
+            <div class="header onprem">TRADITIONAL<br>ON-PREMISES</div>
+            <div class="layers">
+                <div class="layer you-manage">Data & Configurations</div>
+                <div class="layer you-manage">Application Code</div>
+                <div class="layer you-manage">Scaling...</div>
+                <div class="layer you-manage">Runtime</div>
+                <div class="layer you-manage">OS</div>
+                <div class="layer you-manage">Virtualization</div>
+                <div class="layer you-manage">Hardware</div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="header iaas">INFRASTRUCTURE<br>AS A SERVICE<small>(IaaS)</small></div>
+            <div class="layers">
+                <div class="layer you-manage">Data & Configurations</div>
+                <div class="layer you-manage">Application Code</div>
+                <div class="layer you-manage">Scaling...</div>
+                <div class="layer you-manage">Runtime</div>
+                <div class="layer you-manage">OS</div>
+                <div class="layer cloud-manage">Virtualization</div>
+                <div class="layer cloud-manage">Hardware</div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="header caas">CONTAINERS<br>AS A SERVICE<small>(CaaS)</small></div>
+            <div class="layers">
+                <div class="layer you-manage">Data & Configurations</div>
+                <div class="layer you-manage">Application Code</div>
+                <div class="layer you-manage">Scaling...</div>
+                <div class="layer you-manage">Runtime</div>
+                <div class="layer cloud-manage">OS</div>
+                <div class="layer cloud-manage">Virtualization</div>
+                <div class="layer cloud-manage">Hardware</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-dot blue"></div>
+            <span>You Manage</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-dot green"></div>
+            <span>Cloud Provider Manages</span>
+        </div>
+    </div>
+</body>
+</html>
